@@ -4,6 +4,8 @@ import { UserService } from 'src/user/user.service';
 import { compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
+const EXPIRE_TIME = 20 * 1000;
+
 @Injectable()
 export class AuthService {
 	constructor(
@@ -33,8 +35,11 @@ export class AuthService {
 
 		return {
 			user,
-			accessToken,
-			refreshToken,
+			backendTokens: {
+				accessToken,
+				refreshToken,
+				expiresIn: new Date().setTime(new Date().getTime() + EXPIRE_TIME),
+			},
 		};
 	}
 
@@ -70,6 +75,7 @@ export class AuthService {
 		return {
 			accessToken,
 			refreshToken,
+			expiresIn: new Date().setTime(new Date().getTime() + EXPIRE_TIME),
 		};
 	}
 }
