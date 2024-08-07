@@ -4,8 +4,8 @@ import * as fs from 'fs';
 
 @Injectable()
 export class OcrService {
-	async extractText(filePath: string) {
-		const result = await Tesseract.recognize(filePath, 'eng', {
+	async extractText(file: Tesseract.ImageLike) {
+		const result = await Tesseract.recognize(file, 'eng', {
 			logger: (m) => console.log(m),
 		})
 			.then((res) => res.data)
@@ -31,7 +31,7 @@ export class OcrService {
 	// 	return data.Location;
 	// }
 
-	async cleanUp(filePath: string) {
-		fs.unlinkSync(filePath);
-	}
+	// async cleanUp(filePath: string) {
+	// 	fs.unlinkSync(filePath);
+	// }
 }

@@ -1,8 +1,8 @@
 import { IsInt, IsString } from 'class-validator';
 
 export class CreateFileDto {
-	@IsString()
-	filePath: string;
+	// @IsString()
+	// filePath: string;
 
 	@IsString()
 	fileName: string;

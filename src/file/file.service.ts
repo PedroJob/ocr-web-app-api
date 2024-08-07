@@ -15,4 +15,17 @@ export class FileService {
 
 		return newFile;
 	}
+
+	async getById(id: number) {
+		const file = await this.prismaService.file.findUnique({
+			where: { id: id },
+		});
+		return file;
+	}
+
+	getMyFiles(userId: number) {
+		return this.prismaService.file.findMany({
+			where: { userId },
+		});
+	}
 }
